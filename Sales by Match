@@ -1,0 +1,32 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+def sockMerchant(n, ar):
+    counts = {}
+    for color in ar:
+        counts[color] = counts.get(color, 0) + 1
+    
+    total_pairs = 0
+    for count in counts.values():
+        total_pairs += count // 2
+        
+    return total_pairs
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    ar = list(map(int, input().rstrip().split()))
+
+    result = sockMerchant(n, ar)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
