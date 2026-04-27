@@ -1,0 +1,31 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+def pageCount(n, p):
+    # Turns from the front: Page 0 and 1 are the same flip, 2 and 3 are the next, etc.
+    turns_from_front = p // 2
+    
+    # Turns from the back: Calculate total flips in the book and subtract flips from front
+    # This automatically handles both even and odd total page counts (n)
+    turns_from_back = (n // 2) - (p // 2)
+    
+    return min(turns_from_front, turns_from_back)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    p = int(input().strip())
+
+    result = pageCount(n, p)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
