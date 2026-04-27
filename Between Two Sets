@@ -1,0 +1,44 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from functools import reduce
+
+
+def getTotalX(a, b):
+    def get_lcm(n1, n2):
+        if n1 == 0 or n2 == 0: return 0
+        return abs(n1 * n2) // math.gcd(n1, n2)
+
+    lcm_a = reduce(get_lcm, a)
+    
+    gcd_b = reduce(math.gcd, b)
+    
+    count = 0
+    current_multiple = lcm_a
+    while current_multiple <= gcd_b:
+        if gcd_b % current_multiple == 0:
+            count += 1
+        current_multiple += lcm_a
+        
+    return count
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+    m = int(first_multiple_input[1])
+
+    arr = list(map(int, input().rstrip().split()))
+    brr = list(map(int, input().rstrip().split()))
+
+    total = getTotalX(arr, brr)
+
+    fptr.write(str(total) + '\n')
+    fptr.close()
+
