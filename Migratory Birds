@@ -1,0 +1,39 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+def migratoryBirds(arr):
+    count = [0] * 6
+    
+    for bird_type in arr:
+        count[bird_type] += 1
+    
+    max_sightings = 0
+    most_frequent_bird = 0
+    
+    for bird_id in range(1, 6):
+        if count[bird_id] > max_sightings:
+            max_sightings = count[bird_id]
+            most_frequent_bird = bird_id
+            
+    return most_frequent_bird
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr_count = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = migratoryBirds(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
